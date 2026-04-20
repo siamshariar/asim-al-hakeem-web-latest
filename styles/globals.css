@@ -7,11 +7,13 @@
 @layer base {
     html {
         scroll-behavior: smooth;
+        overflow-x: hidden;
     }
     
     body {
         @apply text-secondary font-primary text-[17px] leading-8 antialiased;
         font-family: "Inter", system-ui, sans-serif;
+        overflow-x: hidden;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -199,33 +201,40 @@ nav ul a:hover {
 /* Responsive Container */
 .container {
   width: 100%;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding-left: 0.5125rem;
+  padding-right: 0.5125rem;
+  box-sizing: border-box;
 }
 
 @media (min-width: 640px) {
   .container {
-    max-width: 640px;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
   }
 }
 
 @media (min-width: 768px) {
   .container {
-    max-width: 768px;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 
 @media (min-width: 1024px) {
   .container {
-    max-width: 1024px;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
 }
 
 @media (min-width: 1280px) {
   .container {
     max-width: 1260px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 
@@ -331,55 +340,4 @@ img {
 .mobile-menu-safe {
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
-}
-
-
-/* Container width consistency */
-.container {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Default padding for all containers - 10px on mobile */
-@media (max-width: 479px) {
-  .container {
-    padding-left: 0.625rem !important;
-    padding-right: 0.625rem !important;
-  }
-}
-
-/* Custom container classes for section consistency */
-.section-container {
-  @apply container max-w-[1260px] mx-auto px-2.5 xs:px-3 sm:px-4 md:px-5 lg:px-6 xl:px-8;
-}
-
-/* Fix for mobile overflow */
-body {
-  overflow-x: hidden;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Custom scrollbar */
-.scrollbar-thin::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-}
-
-.scrollbar-thin::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
-}
-
-.scrollbar-thin::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 10px;
-}
-
-.scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
 }
