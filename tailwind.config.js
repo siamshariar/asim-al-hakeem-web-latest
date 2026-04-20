@@ -6,18 +6,8 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    container: {
-      center: true,
-      padding: {
-        DEFAULT: '0.625rem', // 10px
-        xs: '0.75rem',        // 12px
-        sm: '1rem',           // 16px
-        md: '1.25rem',        // 20px
-        lg: '1.5rem',         // 24px
-        xl: '2rem',           // 32px
-        '2xl': '2rem',        // 32px
-      },
-    },
+    // Disable default container to use custom CSS
+    container: false,
     screens: {
       'xs': '480px',
       'sm': '640px',
@@ -73,11 +63,12 @@ module.exports = {
         custom1: '0px 2px 40px 0px rgba(8, 70, 78, 0.08)',
         custom2: '0px 0px 30px 0px rgba(8, 73, 81, 0.06)',
         'glow': '0 0 20px rgba(16, 185, 129, 0.3)',
+        'glow-lg': '0 0 30px rgba(16, 185, 129, 0.4)',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
-        'fade-in': 'fadeIn 0.5s ease-out',
         'slide-up': 'slideUp 0.5s ease-out',
+        'fade-in': 'fadeIn 0.5s ease-out',
       },
       keyframes: {
         float: {
@@ -106,4 +97,4 @@ module.exports = {
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
   ],
-}
+};
