@@ -199,42 +199,45 @@ nav ul a:hover {
 }
 
 /* Responsive Container */
-.container {
-  width: 100%;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 0.5125rem;
-  padding-right: 0.5125rem;
-  box-sizing: border-box;
+body .container {
+  width: 90% !important;
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  padding-left: 0.3125rem !important;
+  padding-right: 0.3125rem !important;
+  box-sizing: border-box !important;
+}
+
+@media only screen and (min-width: 601px) {
+  body .container {
+    width: 85% !important;
+  }
 }
 
 @media (min-width: 640px) {
-  .container {
-    padding-left: 0.625rem;
-    padding-right: 0.625rem;
+  body .container {
+    padding-left: 0.625rem !important;
+    padding-right: 0.625rem !important;
   }
 }
 
 @media (min-width: 768px) {
-  .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+  body .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
 }
 
 @media (min-width: 1024px) {
-  .container {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
+  body .container {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
   }
 }
 
 @media (min-width: 1280px) {
-  .container {
-    max-width: 1260px;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+  body .container {
+    max-width: 1260px !important;
   }
 }
 
