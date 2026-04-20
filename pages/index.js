@@ -48,39 +48,24 @@ export default function Home({
         qna_categories={qna_categories}
       />
 
-      <main className="overflow-x-hidden">
-        {/* Hero Banner - Dark Background */}
+      <main className="overflow-hidden">
         <HeroBanner />
-
-        {/* Stats Section - White Background */}
         <StatsSection />
-
-        {/* Recent Lectures - Light Gray Background */}
         <RecentLecturesEnhanced lectures={lectures} />
-
-        {/* About Preview - White Background */}
         <AboutPreview />
-
-        {/* Featured Books - Light Gray Background */}
         <FeaturedBooks books={books} />
-
-        {/* Articles Section - White Background */}
         <ArticlesSection articles={articles} />
-
-        {/* Q&A and Counselling - Distinct Light Blue Background */}
-        <section className="py-16 lg:py-24 bg-gradient-to-br from-[#eef2ff] via-[#f7f7fe] to-white">
-          <div className="container max-w-[1260px] mx-auto px-4 sm:px-6">
-            <div className="grid lg:grid-cols-2 gap-8">
+        
+        <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-[#eef2ff] via-[#f7f7fe] to-white">
+          <div className="container max-w-[1260px] mx-auto px-2.5 xs:px-3 sm:px-4 md:px-5 lg:px-6 xl:px-8">
+            <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
               <QASection qna={qna} />
               <CounsellingCTA />
             </div>
           </div>
         </section>
 
-        {/* Testimonials - White Background */}
         <TestimonialsSection />
-
-        {/* Newsletter - Accent Gradient Background */}
         <NewsletterSection />
       </main>
     </>
