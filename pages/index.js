@@ -69,7 +69,7 @@ export default function Home({
 
         {/* Q&A and Counselling - Distinct Light Blue Background */}
         <section className="py-16 lg:py-24 bg-gradient-to-br from-[#eef2ff] via-[#f7f7fe] to-white">
-          <div className="container max-w-[1260px] mx-auto">
+          <div className="container max-w-[1260px] mx-auto px-4 sm:px-6">
             <div className="grid lg:grid-cols-2 gap-8">
               <QASection qna={qna} />
               <CounsellingCTA />

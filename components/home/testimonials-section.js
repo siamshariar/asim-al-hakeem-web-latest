@@ -55,7 +55,7 @@ export default function TestimonialsSection() {
 
   return (
     <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-[#1a1f2e]/5 via-white to-[#10b981]/5">
-      <div className="container max-w-[1260px] mx-auto px-4">
+      <div className="container max-w-[1260px] mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

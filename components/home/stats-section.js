@@ -22,7 +22,7 @@ export default function StatsSection() {
 
   return (
     <section className="py-8 sm:py-10 lg:py-12 bg-gradient-to-br from-[#eff6ff] via-[#f8fbff] to-[#ffffff]">
-      <div className="container max-w-[1260px] mx-auto px-4">
+      <div className="container max-w-[1260px] mx-auto px-4 sm:px-6">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
             <span className="text-accent font-semibold uppercase tracking-wider text-sm">Our Impact</span>

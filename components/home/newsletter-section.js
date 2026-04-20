@@ -22,7 +22,7 @@ export default function NewsletterSection() {
 
   return (
     <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-[#10b981] to-[#059669]">
-      <div className="container max-w-[1000px] mx-auto px-4 text-center">
+      <div className="container max-w-[1000px] mx-auto px-4 sm:px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

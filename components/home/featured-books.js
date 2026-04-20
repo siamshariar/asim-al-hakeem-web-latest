@@ -73,7 +73,7 @@ export default function FeaturedBooks({ books }) {
 
     return (
         <section className="py-16 lg:py-20 bg-gradient-to-br from-[#ecfdf5] via-[#f8fafc] to-white">
-            <div className="container max-w-[1260px] mx-auto px-4">
+            <div className="container max-w-[1260px] mx-auto px-4 sm:px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
