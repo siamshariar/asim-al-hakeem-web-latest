@@ -112,7 +112,7 @@ export default function Header2({ playlists, lectures, qna_categories, activePla
   return (
     <>
       {/* Top Bar */}
-      <div className="bg-[#1a1f2e] text-white py-2 hidden xl:block">
+      <div className="bg-[#1a1f2e] text-white py-2 hidden lg:block">
         <div className="container max-w-[1260px] mx-auto px-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-6 text-sm">
@@ -144,7 +144,7 @@ export default function Header2({ playlists, lectures, qna_categories, activePla
 
       {/* Main Header Navigation - FORCE WHITE BACKGROUND */}
       <header style={{ backgroundColor: '#ffffff' }} className={`transition-all duration-300 ${isSticky ? "fixed top-0 left-0 right-0 shadow-xl z-50" : "relative"}`}>
-        <div className="container max-w-[1440px] mx-auto px-4">
+        <div className="container max-w-[1260px] mx-auto px-4">
           <div className="flex items-center justify-between py-2 lg:py-3">
             {/* Logo */}
             <Link href="/" className="flex items-center flex-shrink-0">
@@ -161,7 +161,7 @@ export default function Header2({ playlists, lectures, qna_categories, activePla
             </Link>
 
             {/* Desktop Navigation - FORCE WHITE BACKGROUND */}
-            <nav style={{ backgroundColor: '#ffffff' }} className="hidden xl:flex items-center space-x-1">
+            <nav style={{ backgroundColor: '#ffffff' }} className="hidden lg:flex items-center space-x-1">
               {navLinks.map((link, idx) => (
                 <div key={idx} className="relative"
                   onMouseEnter={() => link.hasDropdown && handleDropdownEnter(link.name)}
@@ -217,17 +217,17 @@ export default function Header2({ playlists, lectures, qna_categories, activePla
             <div className="flex items-center space-x-1 lg:space-x-2">
               <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="hidden xl:flex p-2 rounded-full hover:bg-gray-100 transition-colors">
+                className="hidden lg:flex p-2 rounded-full hover:bg-gray-100 transition-colors">
                 <Search size={20} className="text-[#1a1f2e]" />
               </motion.button>
 
               <motion.button whileTap={{ scale: 0.95 }}
                 onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
-                className="xl:hidden p-2 rounded-full hover:bg-gray-100 transition-colors">
+                className="lg:hidden p-2 rounded-full hover:bg-gray-100 transition-colors">
                 <Search size={20} className="text-[#1a1f2e]" />
               </motion.button>
 
-              <Link href="/ask-question" className="hidden xl:block">
+              <Link href="/ask-question" className="hidden sm:block">
                 <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                   className="flex items-center space-x-1 bg-gradient-to-r from-[#10b981] to-[#059669] text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg shadow-[#10b981]/25 hover:shadow-xl hover:shadow-[#10b981]/30 transition-all duration-300 whitespace-nowrap">
                   <HelpCircle size={16} />
@@ -237,7 +237,7 @@ export default function Header2({ playlists, lectures, qna_categories, activePla
 
               <motion.button whileTap={{ scale: 0.95 }}
                 onClick={() => setMobileMenuOpen(true)}
-                className="p-2 rounded-full hover:bg-gray-100 xl:hidden transition-colors">
+                className="p-2 rounded-full hover:bg-gray-100 lg:hidden transition-colors">
                 <Menu size={22} className="text-[#1a1f2e]" />
               </motion.button>
             </div>
@@ -276,7 +276,7 @@ export default function Header2({ playlists, lectures, qna_categories, activePla
         <AnimatePresence>
           {mobileSearchOpen && (
             <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }} className="xl:hidden border-t border-gray-100 bg-gray-50 overflow-hidden">
+              transition={{ duration: 0.3 }} className="lg:hidden border-t border-gray-100 bg-gray-50 overflow-hidden">
               <div className="px-4 py-3">
                 <form onSubmit={handleSearch} className="flex items-center gap-2">
                   <div className="flex-1 relative">
@@ -308,9 +308,9 @@ export default function Header2({ playlists, lectures, qna_categories, activePla
         {mobileMenuOpen && (
           <>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] xl:hidden" onClick={() => setMobileMenuOpen(false)} />
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[100] lg:hidden" onClick={() => setMobileMenuOpen(false)} />
             <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 30 }} className="fixed top-0 right-0 h-full w-[280px] bg-white z-[101] xl:hidden shadow-2xl">
+              transition={{ type: "spring", damping: 30 }} className="fixed top-0 right-0 h-full w-[280px] bg-white z-[101] lg:hidden shadow-2xl">
               <div className="flex flex-col h-full">
                 <div className="flex items-center justify-between p-4 border-b border-gray-100">
                   <span className="text-lg font-semibold text-[#1a1f2e]">Menu</span>
