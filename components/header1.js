@@ -223,7 +223,7 @@ export default function Header2({ playlists, lectures, qna_categories, activePla
               <motion.button whileTap={{ scale: 0.95 }}
                 onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
                 className="lg:hidden p-2 rounded-full hover:bg-gray-100 transition-colors">
-                <Search size={18} className="text-[#1a1f2e]" />
+                // <Search size={18} className="text-[#1a1f2e]" />
               </motion.button>
 
               <Link href="/ask-question" className="hidden sm:block">
