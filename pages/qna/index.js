@@ -29,12 +29,12 @@ export default function QnaPage({ playlists, headerLectures, qnaCategories, qnaI
       <Header2 playlists={playlists} lectures={headerLectures} qna_categories={qnaCategories} />
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#1a1f2e] to-[#2a3142] py-8 sm:py-10 lg:py-14">
-        <div className="max-w-[1260px] mx-auto px-3 sm:px-4 lg:px-5 xl:px-8 text-center">
+      <section className="bg-gradient-to-br from-[#1a1f2e] to-[#2a3142] py-6 xs:py-8 sm:py-10 lg:py-14">
+        <div className="max-w-[1260px] mx-auto px-3 xs:px-4 sm:px-5 lg:px-6 xl:px-8 text-center">
           <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}>
-            <HelpCircle size={32} className="sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-[#10b981] mx-auto mb-3 sm:mb-4" />
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-2 sm:mb-3">Questions & Answers</h1>
-            <p className="text-sm sm:text-base text-gray-300 max-w-2xl mx-auto px-4">
+            <HelpCircle size={28} className="xs:w-8 xs:h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 text-[#10b981] mx-auto mb-2 xs:mb-3 sm:mb-4" />
+            <h1 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-1 xs:mb-2 sm:mb-3">Questions & Answers</h1>
+            <p className="text-xs xs:text-sm sm:text-base text-gray-300 max-w-2xl mx-auto px-2 xs:px-4">
               Find authentic Islamic answers from Sheikh Assim Al Hakeem
             </p>
           </motion.div>
@@ -42,25 +42,25 @@ export default function QnaPage({ playlists, headerLectures, qnaCategories, qnaI
       </section>
 
       {/* Search and Filter Section */}
-      <section className="py-3 sm:py-4 lg:py-6 bg-white border-b border-gray-100 sticky top-[56px] sm:top-[60px] lg:top-[60px] z-30">
-        <div className="max-w-[1260px] mx-auto px-3 sm:px-4 lg:px-5 xl:px-8">
-          <div className="flex flex-col lg:flex-row gap-3 lg:gap-4 items-start lg:items-center">
+      <section className="py-2.5 xs:py-3 sm:py-4 lg:py-6 bg-white border-b border-gray-100 sticky top-[50px] xs:top-[52px] sm:top-[56px] lg:top-[60px] z-30">
+        <div className="max-w-[1260px] mx-auto px-3 xs:px-4 sm:px-5 lg:px-6 xl:px-8">
+          <div className="flex flex-col lg:flex-row gap-2.5 xs:gap-3 lg:gap-4 items-start lg:items-center">
             {/* Search Input */}
             <div className="relative w-full lg:w-80">
-              <Search size={16} className="sm:w-[18px] sm:h-[18px] absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-gray-400" />
+              {/* <Search size={14} className="xs:w-4 xs:h-4 sm:w-[18px] sm:h-[18px] absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-gray-400" /> */}
               <input 
                 type="text" 
                 placeholder="Search questions..." 
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-9 sm:pl-12 pr-8 sm:pr-10 py-2 sm:py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#10b981]/20 focus:border-[#10b981] text-sm sm:text-base text-[#1a1f2e]"
+                className="w-full pl-8 xs:pl-9 sm:pl-12 pr-7 xs:pr-8 sm:pr-10 py-2 sm:py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#10b981]/20 focus:border-[#10b981] text-xs xs:text-sm sm:text-base text-[#1a1f2e]"
               />
               {searchTerm && (
                 <button
                   onClick={() => setSearchTerm("")}
                   className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
                 >
-                  <X size={14} className="sm:w-4 sm:h-4" />
+                  <X size={12} className="xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4" />
                 </button>
               )}
             </div>
@@ -68,30 +68,39 @@ export default function QnaPage({ playlists, headerLectures, qnaCategories, qnaI
             {/* Mobile Filter Toggle */}
             <button
               onClick={() => setShowMobileFilters(!showMobileFilters)}
-              className="lg:hidden flex items-center justify-between w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-gray-100 rounded-lg text-sm sm:text-base"
+              className="lg:hidden flex items-center justify-between w-full px-3 sm:px-4 py-2 sm:py-2.5 bg-gray-100 rounded-lg text-xs xs:text-sm sm:text-base"
             >
               <span className="text-gray-700">{activeCategoryName}</span>
-              <ChevronRight size={16} className={`transition-transform ${showMobileFilters ? 'rotate-90' : ''}`} />
+              <ChevronRight size={14} className={`xs:w-4 xs:h-4 transition-transform ${showMobileFilters ? 'rotate-90' : ''}`} />
             </button>
 
             {/* Category Filters - Desktop */}
-            <div className="hidden lg:flex gap-2 overflow-x-auto w-full lg:w-auto pb-1 scrollbar-thin">
-              <button onClick={() => setSelectedCategory("all")}
-                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap transition-all focus:outline-none
-                  ${selectedCategory === "all" ? "bg-[#10b981] text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}>
+            <div className="hidden lg:flex gap-1.5 lg:gap-2 overflow-x-auto w-full lg:w-auto pb-1 scrollbar-thin">
+              <button 
+                onClick={() => setSelectedCategory("all")}
+                className={`px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm font-medium whitespace-nowrap transition-all focus:outline-none focus:ring-0
+                  ${selectedCategory === "all" 
+                    ? "bg-[#10b981] text-white hover:bg-[#10b981] focus:bg-[#10b981] focus:text-white" 
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200 focus:bg-gray-200"}`}
+              >
                 All Categories
               </button>
               {qnaCategories?.filter(c => c.slug !== "all").map(cat => (
-                <button key={cat.id} onClick={() => setSelectedCategory(cat.slug)}
-                  className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap transition-all focus:outline-none
-                    ${selectedCategory === cat.slug ? "bg-[#10b981] text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}>
+                <button 
+                  key={cat.id} 
+                  onClick={() => setSelectedCategory(cat.slug)}
+                  className={`px-3 lg:px-4 py-1.5 lg:py-2 rounded-full text-xs lg:text-sm font-medium whitespace-nowrap transition-all focus:outline-none focus:ring-0
+                    ${selectedCategory === cat.slug 
+                      ? "bg-[#10b981] text-white hover:bg-[#10b981] focus:bg-[#10b981] focus:text-white" 
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200 focus:bg-gray-200"}`}
+                >
                   {cat.title}
                 </button>
               ))}
             </div>
 
-            {/* Result Count */}
-            <div className="hidden lg:block text-xs sm:text-sm text-gray-500 whitespace-nowrap ml-auto">
+            {/* Result Count - Desktop */}
+            <div className="hidden lg:block text-xs lg:text-sm text-gray-500 whitespace-nowrap ml-auto">
               {filteredQna.length} {filteredQna.length === 1 ? 'result' : 'results'}
             </div>
           </div>
@@ -102,23 +111,32 @@ export default function QnaPage({ playlists, headerLectures, qnaCategories, qnaI
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden mt-3 pt-3 border-t border-gray-100"
+              className="lg:hidden mt-2.5 xs:mt-3 pt-2.5 xs:pt-3 border-t border-gray-100"
             >
-              <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                <button onClick={() => { setSelectedCategory("all"); setShowMobileFilters(false); }}
-                  className={`px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all
-                    ${selectedCategory === "all" ? "bg-[#10b981] text-white" : "bg-gray-100 text-gray-700"}`}>
+              <div className="flex flex-wrap gap-1 xs:gap-1.5 sm:gap-2">
+                <button 
+                  onClick={() => { setSelectedCategory("all"); setShowMobileFilters(false); }}
+                  className={`px-2.5 xs:px-3 py-1.5 rounded-full text-xs xs:text-sm font-medium transition-all focus:outline-none focus:ring-0
+                    ${selectedCategory === "all" 
+                      ? "bg-[#10b981] text-white hover:bg-[#10b981] focus:bg-[#10b981] focus:text-white" 
+                      : "bg-gray-100 text-gray-700 hover:bg-gray-200 focus:bg-gray-200"}`}
+                >
                   All Categories
                 </button>
                 {qnaCategories?.filter(c => c.slug !== "all").map(cat => (
-                  <button key={cat.id} onClick={() => { setSelectedCategory(cat.slug); setShowMobileFilters(false); }}
-                    className={`px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all
-                      ${selectedCategory === cat.slug ? "bg-[#10b981] text-white" : "bg-gray-100 text-gray-700"}`}>
+                  <button 
+                    key={cat.id} 
+                    onClick={() => { setSelectedCategory(cat.slug); setShowMobileFilters(false); }}
+                    className={`px-2.5 xs:px-3 py-1.5 rounded-full text-xs xs:text-sm font-medium transition-all focus:outline-none focus:ring-0
+                      ${selectedCategory === cat.slug 
+                        ? "bg-[#10b981] text-white hover:bg-[#10b981] focus:bg-[#10b981] focus:text-white" 
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200 focus:bg-gray-200"}`}
+                  >
                     {cat.title}
                   </button>
                 ))}
               </div>
-              <div className="text-xs text-gray-500 mt-3">
+              <div className="text-xxs xs:text-xs text-gray-500 mt-2.5 xs:mt-3">
                 {filteredQna.length} {filteredQna.length === 1 ? 'result' : 'results'} found
               </div>
             </motion.div>
@@ -127,32 +145,32 @@ export default function QnaPage({ playlists, headerLectures, qnaCategories, qnaI
       </section>
 
       {/* Q&A List */}
-      <section className="py-8 sm:py-10 lg:py-14 bg-gray-50 min-h-[60vh]">
-        <div className="max-w-[1000px] mx-auto px-3 sm:px-4 lg:px-5 xl:px-8">
+      <section className="py-6 xs:py-8 sm:py-10 lg:py-14 bg-gray-50 min-h-[60vh]">
+        <div className="max-w-[1000px] mx-auto px-3 xs:px-4 sm:px-5 lg:px-6 xl:px-8">
           {filteredQna.length > 0 ? (
-            <div className="space-y-3 sm:space-y-4">
+            <div className="space-y-2.5 xs:space-y-3 sm:space-y-4">
               {filteredQna.map((item, idx) => (
                 <motion.div 
                   key={item.id} 
                   initial={{ opacity: 0, y: 20 }} 
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.05 }} 
-                  className="bg-white rounded-xl shadow-sm hover:shadow-md transition-all p-4 sm:p-5 lg:p-6"
+                  className="bg-white rounded-lg xs:rounded-xl shadow-sm hover:shadow-md transition-all p-3.5 xs:p-4 sm:p-5 lg:p-6"
                 >
                   <div className="flex items-start gap-2 sm:gap-3">
-                    <MessageCircle size={16} className="sm:w-[18px] sm:h-[18px] lg:w-5 lg:h-5 text-[#10b981] mt-1 flex-shrink-0" />
+                    <MessageCircle size={14} className="xs:w-4 xs:h-4 sm:w-[18px] sm:h-[18px] lg:w-5 lg:h-5 text-[#10b981] mt-0.5 xs:mt-1 flex-shrink-0" />
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-[#1a1f2e] mb-1.5 sm:mb-2 line-clamp-2">
+                      <h3 className="text-sm xs:text-base sm:text-lg font-semibold text-[#1a1f2e] mb-1 sm:mb-2 line-clamp-2">
                         {item.question}
                       </h3>
-                      <p className="text-xs sm:text-sm text-gray-600 line-clamp-2 sm:line-clamp-3 mb-2 sm:mb-3">
+                      <p className="text-xs sm:text-sm text-gray-600 line-clamp-2 sm:line-clamp-3 mb-1.5 sm:mb-3">
                         {item.answer}
                       </p>
                       <Link 
                         href={`/qna/answer/${item.id}`} 
                         className="inline-flex items-center gap-1 text-[#10b981] text-xs sm:text-sm font-medium hover:gap-2 transition-all"
                       >
-                        Read Full Answer <ChevronRight size={12} className="sm:w-3.5 sm:h-3.5" />
+                        Read Full Answer <ChevronRight size={10} className="xs:w-3 xs:h-3 sm:w-3.5 sm:h-3.5" />
                       </Link>
                     </div>
                   </div>
@@ -160,27 +178,27 @@ export default function QnaPage({ playlists, headerLectures, qnaCategories, qnaI
               ))}
             </div>
           ) : (
-            <div className="text-center py-12 sm:py-16">
-              <FolderOpen size={40} className="sm:w-12 sm:h-12 text-gray-300 mx-auto mb-3 sm:mb-4" />
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-600 mb-1 sm:mb-2">No questions found</h3>
-              <p className="text-sm sm:text-base text-gray-500">Try adjusting your search or filter</p>
+            <div className="text-center py-10 xs:py-12 sm:py-16">
+              <FolderOpen size={36} className="xs:w-10 xs:h-10 sm:w-12 sm:h-12 text-gray-300 mx-auto mb-2.5 xs:mb-3 sm:mb-4" />
+              <h3 className="text-base xs:text-lg sm:text-xl font-semibold text-gray-600 mb-1 sm:mb-2">No questions found</h3>
+              <p className="text-xs xs:text-sm sm:text-base text-gray-500">Try adjusting your search or filter</p>
             </div>
           )}
         </div>
       </section>
 
       {/* Ask Question CTA */}
-      <section className="py-10 sm:py-12 bg-gradient-to-r from-[#10b981] to-[#059669]">
-        <div className="max-w-[800px] mx-auto px-3 sm:px-4 lg:px-5 xl:px-8 text-center">
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-2 sm:mb-3">Have a Question?</h2>
-          <p className="text-sm sm:text-base text-white/90 mb-5 sm:mb-6 max-w-md mx-auto">
+      <section className="py-8 xs:py-10 sm:py-12 bg-gradient-to-r from-[#10b981] to-[#059669]">
+        <div className="max-w-[800px] mx-auto px-3 xs:px-4 sm:px-5 lg:px-6 xl:px-8 text-center">
+          <h2 className="text-lg xs:text-xl sm:text-2xl lg:text-3xl font-bold text-white mb-1.5 xs:mb-2 sm:mb-3">Have a Question?</h2>
+          <p className="text-xs xs:text-sm sm:text-base text-white/90 mb-4 xs:mb-5 sm:mb-6 max-w-md mx-auto">
             Submit your question to get guidance from Sheikh Assim Al Hakeem
           </p>
           <Link href="/ask-question">
             <motion.button 
               whileHover={{ scale: 1.02 }} 
               whileTap={{ scale: 0.98 }}
-              className="px-6 sm:px-8 py-2.5 sm:py-3 bg-white text-[#10b981] rounded-full text-sm sm:text-base font-medium shadow-lg hover:shadow-xl transition-all"
+              className="px-5 xs:px-6 sm:px-8 py-2 sm:py-2.5 lg:py-3 bg-white text-[#10b981] rounded-full text-xs xs:text-sm sm:text-base font-medium shadow-lg hover:shadow-xl transition-all"
             >
               Ask a Question
             </motion.button>
