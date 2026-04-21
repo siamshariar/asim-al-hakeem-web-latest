@@ -1,17 +1,27 @@
 .modalWrapper {
   display: flex;
   justify-content: center;
-  align-items: center; /* Vertically centers the modal */
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  
-  background-color: rgba(0, 0, 0, 0.8); /* Dimmed background */
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
   z-index: 1000;
-  padding: 0; /* No padding for the full screen effect */
-  box-sizing: border-box; /* Ensures padding is included in width/height */
+  padding: 0;
+  box-sizing: border-box;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .overlay {
@@ -20,36 +30,128 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
+  padding: 0;
+  position: relative;
 }
 
 .content {
   position: relative;
-  overflow: hidden;
-  max-width: 1200px; 
-  width: 80%;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: visible;
+  max-width: 1200px;
+  width: 95%;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.25s ease-out;
 }
 
-.closeButton {
-  position: fixed; 
-  top: 5px;
-  right: 20px; 
-  background: none;
-  border: none;
-  font-size: 3rem; 
-  color: #fff;
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Desktop Close Button - Half inside, half outside iframe */
+.closeDesktop {
+  position: absolute;
+  top: -18px;
+  right: -18px;
+  height: 44px;
+  width: 44px;
   cursor: pointer;
-  z-index: 1001; 
+  z-index: 100;
+  background-color: rgba(26, 31, 46, 0.95);
+  border-radius: 50%;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
+.closeDesktop:hover {
+  background-color: #ef4444;
+  transform: scale(1.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.closeDesktop::before,
+.closeDesktop::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 2.5px;
+  background-color: white;
+  border-radius: 9999px;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.closeDesktop::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Mobile Close Button - Fixed to screen top-right */
+.closeMobile {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  height: 44px;
+  width: 44px;
+  cursor: pointer;
+  z-index: 1001;
+  background-color: rgba(26, 31, 46, 0.95);
+  border-radius: 50%;
+  backdrop-filter: blur(4px);
+  transition: all 0.2s ease;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.closeMobile:hover {
+  background-color: #ef4444;
+  transform: scale(1.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.closeMobile::before,
+.closeMobile::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 2.5px;
+  background-color: white;
+  border-radius: 9999px;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.closeMobile::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+/* Iframe Container - Disables all interactions */
 .iframeContainer {
   position: relative;
   width: 100%;
   padding-bottom: 56.25%;
   height: 0;
   overflow: hidden;
-
+  background: #000;
+  border-radius: 16px 16px 0 0;
+  pointer-events: none;
 }
 
 .iframe {
@@ -59,111 +161,426 @@
   width: 100%;
   height: 100%;
   border: none;
-
+  pointer-events: none;
+  user-select: none;
 }
 
+/* YouTube Watermark Indicator */
+.youtubeIndicator {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 5;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.youtubeIndicator svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Details Section - Title and Share */
 .details {
-  padding: 15px;
-  background-color: #fff;
+  padding: 16px 20px;
+  background-color: #ffffff;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  border-radius: 0 0 16px 16px;
+  border-top: 1px solid #e5e7eb;
 }
 
 .title {
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 600;
   margin: 0;
+  color: #1a1f2e;
+  line-height: 1.4;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .share {
-  margin-top: 2px;
-  justify-content: end;
-  margin-left: 10px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
 
-.close {
-	position: fixed;
-	top: 1.75rem;
-	right: 1.25rem;
-	height: 30px;
-	width: 30px;
-	cursor: pointer;
-	opacity: 0.65;
-	z-index: 9;
-}
-
-.close:hover {
-	opacity: 1;
-}
-
-.close::before, .close::after {
-	content: "";
-	position: absolute;
-	top: 1px;
-	left: 12px;
-	width: 3px;
-	height: 30px;
-	background-color: white;
-	border-radius: 9999px;
-}
-
-.close::before {
-	transform: rotate(45deg);
-}
-
-.close::after {
-	transform: rotate(-45deg);
-}
-
-@media (min-width: 1440px) {
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
   .content {
-    width: 100%; 
-    max-width: 1000px; 
-  }
-}
-
-@media (min-width: 1240px) {
-  .content {
-    width: 100%; 
-    max-width: 1000px; 
-  }
-}
-
-
-/* For mobile screens */
-@media (max-width: 768px) {
-  .modalWrapper {
-    padding: 0; 
+    background: #1a1f2e;
   }
 
-  .content {
-    width: 100%; 
-    max-width: 1000;
-    margin: 0; 
+  .details {
+    background-color: #1a1f2e;
+    border-top-color: #2a3142;
   }
 
   .title {
-    font-size: 1.125rem; 
+    color: #ffffff;
   }
 
-  .closeButton {
-    font-size: 2.5rem; 
-    top: 20px; 
-    right: 20px;
+  .iframeContainer {
+    border-radius: 16px 16px 0 0;
   }
 }
 
-@media (max-width: 1024px) {
+/* ============================================ */
+/* MOBILE STYLES */
+/* ============================================ */
+
+/* Mobile Devices (up to 640px) - Show mobile close, hide desktop close */
+@media (max-width: 640px) {
+  .closeDesktop {
+    display: none !important;
+  }
+
+  .closeMobile {
+    display: flex !important;
+  }
+}
+
+/* Desktop Devices (641px and up) - Show desktop close, hide mobile close */
+@media (min-width: 641px) {
+  .closeDesktop {
+    display: flex !important;
+  }
+
+  .closeMobile {
+    display: none !important;
+  }
+}
+
+/* Small Mobile Devices (up to 380px) */
+@media (max-width: 380px) {
+  .closeMobile {
+    top: 12px !important;
+    right: 12px !important;
+    height: 40px !important;
+    width: 40px !important;
+  }
+
+  .closeMobile::before,
+  .closeMobile::after {
+    width: 18px !important;
+  }
+}
+
+/* ============================================ */
+/* RESPONSIVE STYLES */
+/* ============================================ */
+
+/* Mobile Devices (up to 480px) - Full width */
+@media (max-width: 480px) {
+  .modalWrapper {
+    padding: 0;
+  }
+
+  .overlay {
+    padding: 0;
+  }
+
   .content {
-    width: 84%;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+  }
+
+  .iframeContainer {
+    border-radius: 0;
+  }
+
+  .details {
+    padding: 10px 12px;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .title {
+    font-size: 0.875rem;
+    -webkit-line-clamp: 3;
+  }
+
+  .share {
+    align-self: flex-end;
+  }
+
+  .youtubeIndicator {
+    bottom: 8px;
+    left: 8px;
+    padding: 4px 10px;
+    font-size: 10px;
+  }
+
+  .youtubeIndicator svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* Small Mobile Devices (up to 380px) */
+@media (max-width: 380px) {
+  .details {
+    padding: 8px 10px;
+  }
+
+  .title {
+    font-size: 0.8125rem;
+  }
+
+  .youtubeIndicator {
+    bottom: 6px;
+    left: 6px;
+    padding: 3px 8px;
+    font-size: 9px;
+  }
+}
+
+/* Small Devices (481px - 640px) */
+@media (min-width: 481px) and (max-width: 640px) {
+  .overlay {
+    padding: 0;
+  }
+
+  .content {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+  }
+
+  .iframeContainer {
+    border-radius: 0;
+  }
+
+  .details {
+    padding: 12px 16px;
+  }
+
+  .title {
+    font-size: 0.9375rem;
+  }
+
+  .youtubeIndicator {
+    bottom: 10px;
+    left: 10px;
+  }
+}
+
+/* Medium Devices (641px - 768px) */
+@media (min-width: 641px) and (max-width: 768px) {
+  .overlay {
+    padding: 0.5rem;
+  }
+
+  .content {
+    width: 96%;
+    border-radius: 12px;
+  }
+
+  .iframeContainer {
+    border-radius: 12px 12px 0 0;
+  }
+
+  .closeDesktop {
+    top: -16px;
+    right: -16px;
+    height: 40px;
+    width: 40px;
+  }
+
+  .closeDesktop::before,
+  .closeDesktop::after {
+    width: 18px;
+  }
+
+  .details {
+    padding: 14px 18px;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+}
+
+/* Tablets (769px - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .overlay {
+    padding: 1rem;
+  }
+
+  .content {
+    width: 90%;
+    max-width: 900px;
+    border-radius: 14px;
+  }
+
+  .iframeContainer {
+    border-radius: 14px 14px 0 0;
+  }
+
+  .closeDesktop {
+    top: -17px;
+    right: -17px;
+    height: 42px;
+    width: 42px;
+  }
+
+  .title {
+    font-size: 1.1rem;
+  }
+}
+
+/* Large Screens (1025px - 1280px) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .overlay {
+    padding: 1rem;
+  }
+
+  .content {
+    width: 85%;
     max-width: 1000px;
-    margin: 0;
+    border-radius: 16px;
+  }
+
+  .iframeContainer {
+    border-radius: 16px 16px 0 0;
+  }
+
+  .title {
+    font-size: 1.125rem;
   }
 }
 
-@media (max-width: 600px) {
-  .content {
-    width: 100%; 
+/* Extra Large Screens (1281px+) */
+@media (min-width: 1281px) {
+  .overlay {
+    padding: 1.5rem;
   }
 
+  .content {
+    width: 80%;
+    max-width: 1100px;
+    border-radius: 16px;
+  }
+
+  .iframeContainer {
+    border-radius: 16px 16px 0 0;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .details {
+    padding: 18px 24px;
+  }
+}
+
+/* 2K and 4K Screens */
+@media (min-width: 1920px) {
+  .content {
+    max-width: 1400px;
+  }
+
+  .title {
+    font-size: 1.35rem;
+  }
+
+  .details {
+    padding: 22px 28px;
+  }
+
+  .closeDesktop {
+    top: -20px;
+    right: -20px;
+    height: 48px;
+    width: 48px;
+  }
+
+  .closeDesktop::before,
+  .closeDesktop::after {
+    width: 24px;
+  }
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 896px) and (orientation: landscape) {
+  .overlay {
+    padding: 0;
+  }
+
+  .content {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .iframeContainer {
+    border-radius: 0;
+    padding-bottom: 50%;
+  }
+
+  .closeMobile {
+    top: 10px !important;
+    right: 10px !important;
+    height: 36px !important;
+    width: 36px !important;
+  }
+
+  .closeMobile::before,
+  .closeMobile::after {
+    width: 16px;
+    height: 2px;
+  }
+
+  .details {
+    padding: 8px 12px;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 0.8125rem;
+    -webkit-line-clamp: 1;
+  }
+
+  .youtubeIndicator {
+    bottom: 6px;
+    left: 6px;
+    padding: 3px 8px;
+    font-size: 9px;
+  }
+}
+
+/* Tall phones (portrait) */
+@media (max-width: 480px) and (min-height: 700px) {
+  .iframeContainer {
+    padding-bottom: 56.25%;
+  }
+}
+
+/* Fix for iOS Safari */
+@supports (-webkit-touch-callout: none) {
+  .modalWrapper {
+    height: -webkit-fill-available;
+  }
 }
