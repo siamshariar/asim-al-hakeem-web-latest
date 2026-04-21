@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import styles from './Video.module.css';
 import { server } from '../../lib/config';
 import Share from '../../components/share';
@@ -51,28 +50,39 @@ export default function VideoModal({ isOpen, onClose, videoId, title, playlistId
     );
 
     return (
-        <AnimatePresence>
-            {isOpen && (
-                <>
-                    <Meta
-                        title={title || 'Video'}
-                        description={description || 'Watch this video from Sheikh Assim Al Hakeem.'}
-                        url={`${server}/lectures/${playlistId}?v=${videoId}`}
-                        image={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
-                        type="video.other"
-                    />
-                    
-                    <motion.section 
-                        className={styles.modalWrapper}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        onClick={handleOverlayClick}
+        <>
+            <Meta
+                title={title || 'Video'}
+                description={description || 'Watch this video from Sheikh Assim Al Hakeem.'}
+                url={`${server}/lectures/${playlistId}?v=${videoId}`}
+                image={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+                type="video.other"
+            />
+            
+            <section className={styles.modalWrapper} onClick={handleOverlayClick}>
+                {/* Mobile Close Button - Fixed to screen */}
+                <span 
+                    className={styles.closeMobile} 
+                    onClick={onClose}
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Close video"
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            onClose();
+                        }
+                    }}
+                />
+                
+                <div className={styles.overlay}>
+                    <div
+                        className={styles.content}
+                        onClick={(e) => e.stopPropagation()}
                     >
-                        {/* Mobile Close Button - Fixed to screen */}
+                        {/* Desktop Close Button - Half inside/outside iframe */}
                         <span 
-                            className={styles.closeMobile} 
+                            className={styles.closeDesktop} 
                             onClick={onClose}
                             role="button"
                             tabIndex={0}
@@ -85,63 +95,37 @@ export default function VideoModal({ isOpen, onClose, videoId, title, playlistId
                             }}
                         />
                         
-                        <div className={styles.overlay}>
-                            <motion.div
-                                className={styles.content}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: 20 }}
-                                transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-                                onClick={(e) => e.stopPropagation()}
-                            >
-                                {/* Desktop Close Button - Half inside/outside iframe */}
-                                <span 
-                                    className={styles.closeDesktop} 
-                                    onClick={onClose}
-                                    role="button"
-                                    tabIndex={0}
-                                    aria-label="Close video"
-                                    onKeyDown={(e) => {
-                                        if (e.key === 'Enter' || e.key === ' ') {
-                                            e.preventDefault();
-                                            onClose();
-                                        }
-                                    }}
-                                />
-                                
-                                <div className={styles.iframeContainer}>
-                                    <iframe
-                                        className={styles.iframe}
-                                        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&rel=0&modestbranding=1&controls=1&disablekb=1&enablejsapi=0&iv_load_policy=3`}
-                                        title={title}
-                                        frameBorder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        allowFullScreen={false}
-                                        loading="lazy"
-                                        sandbox="allow-scripts allow-same-origin allow-presentation"
-                                    />
-                                    
-                                    <div className={styles.youtubeIndicator}>
-                                        <YouTubeIcon />
-                                        <span>YouTube</span>
-                                    </div>
-                                </div>
-                                
-                                <div className={styles.details}>
-                                    <h2 className={styles.title}>{title}</h2>
-                                    <div className={styles.share}>
-                                        <Share
-                                            urlWeb={videoUrl}
-                                            urlMobile={videoUrl}
-                                            title={title}
-                                        />
-                                    </div>
-                                </div>
-                            </motion.div>
+                        <div className={styles.iframeContainer}>
+                            <iframe
+                                className={styles.iframe}
+                                src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=0&rel=0&modestbranding=1&controls=1&disablekb=1&enablejsapi=0&iv_load_policy=3`}
+                                title={title}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowFullScreen={false}
+                                loading="eager"
+                                sandbox="allow-scripts allow-same-origin allow-presentation"
+                            />
+                            
+                            {/* <div className={styles.youtubeIndicator}>
+                                <YouTubeIcon />
+                                <span>YouTube</span>
+                            </div> */}
                         </div>
-                    </motion.section>
-                </>
-            )}
-        </AnimatePresence>
+                        
+                        <div className={styles.details}>
+                            <h2 className={styles.title}>{title}</h2>
+                            <div className={styles.share}>
+                                <Share
+                                    urlWeb={videoUrl}
+                                    urlMobile={videoUrl}
+                                    title={title}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </>
     );
 }
