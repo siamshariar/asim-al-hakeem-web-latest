@@ -14,6 +14,7 @@ import Layout from "../components/layout";
 
 const App = ({ Component, pageProps }) => {
   const router = useRouter();
+  const routeKey = router.asPath;
   
   useEffect(() => {
     const handleRouteChange = (url) => {
@@ -29,13 +30,13 @@ const App = ({ Component, pageProps }) => {
 
   return (
     <Layout>
-      <AnimatePresence mode="wait" initial={false}>
+      <AnimatePresence mode="wait">
         <motion.div
-          key={router.pathname}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
+          key={routeKey}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.35 }}
         >
           <Component {...pageProps} />
         </motion.div>
