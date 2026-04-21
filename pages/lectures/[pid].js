@@ -352,7 +352,7 @@ export async function getStaticProps({ params }) {
         playlists: playlists || { playlists: [], playlistsTitle: {} },
         qna_categories: qna_categories || [],
       },
-      revalidate: 60,
+      revalidate: 3600,
     };
   } catch (error) {
     console.error('Error fetching lectures:', error);
@@ -363,7 +363,7 @@ export async function getStaticProps({ params }) {
         playlists: { playlists: [], playlistsTitle: {} },
         qna_categories: [],
       },
-      revalidate: 60,
+      revalidate: 3600,
     };
   }
 }
